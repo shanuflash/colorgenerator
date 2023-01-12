@@ -17,9 +17,8 @@ function App() {
     "Pink",
     "Monochrome",
   ];
-  const [Hue, setHue] = useState("Red");
-  let a = "pink";
-  const [Luminosity, setLuminosity] = useState("Dark");
+  const [Hue, setHue] = useState("random");
+  const [Luminosity, setLuminosity] = useState("random");
   const handleHue = (event) => {
     setHue(event.target.value);
   };
@@ -27,11 +26,10 @@ function App() {
     setLuminosity(event.target.value);
   };
   var color = randomcolor({
-    hue: a,
+    hue: Hue,
     luminosity: Luminosity,
     format: "hex",
   });
-  console.log(Hue);
   return (
     <div className="App">
       {/* //hue: red, orange, yellow, green, blue, purple, pink and monochrome
@@ -54,7 +52,7 @@ function App() {
               onChange={handleHue}
             >
               {hueArray.map((hueMap) => (
-                <Radio value={hueMap} label={hueMap} />
+                <Radio value={hueMap.toLowerCase()} label={hueMap} />
               ))}
             </RadioGroup>
           </FormControl>
@@ -74,7 +72,7 @@ function App() {
                 style={{
                   alignItems: "center",
                 }}
-                value={luminosityMap}
+                value={luminosityMap.toLowerCase()}
                 label={luminosityMap}
               />
             ))}
