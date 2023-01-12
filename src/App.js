@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function App() {
   const luminosityArray = ["Random", "Light", "Dark"];
+  const formatArray = ["HEX", "RGB", "HSL"];
   const hueArray = [
     "Random",
     "Red",
@@ -19,23 +20,27 @@ function App() {
   ];
   const [Hue, setHue] = useState("random");
   const [Luminosity, setLuminosity] = useState("random");
+  const [Format, setFormat] = useState("HEX");
   const handleHue = (event) => {
     setHue(event.target.value);
   };
   const handleLuminosity = (event) => {
     setLuminosity(event.target.value);
   };
+  const handleFormat = (event) => {
+    setFormat(event.target.value);
+  };
   var color = randomcolor({
     hue: Hue,
     luminosity: Luminosity,
-    format: "hex",
+    format: Format,
   });
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: color }}>
       {/* //hue: red, orange, yellow, green, blue, purple, pink and monochrome
       //luminosity: light or dark 
       //count: number 
-      //format: rgb, rgba, hsl, hsla and hex 
+      //format: rgb, hsl, and hex 
       //https://www.npmjs.com/package/randomcolor */}
       <div className="title">Color Generator</div>
       <div className="desc">Generate attractive random colors!</div>
@@ -46,6 +51,7 @@ function App() {
             <FormLabel>Hue</FormLabel>
             <RadioGroup
               row
+              sx={{ flexWrap: "wrap" }}
               className="hueRadio"
               name="radio-buttons-group"
               value={Hue}
@@ -62,6 +68,7 @@ function App() {
           <FormLabel>Luminosity</FormLabel>
           <RadioGroup
             row
+            style={{ flexWrap: "wrap" }}
             className="luminosityRadio"
             name="radio-buttons-group"
             value={Luminosity}
@@ -78,7 +85,28 @@ function App() {
             ))}
           </RadioGroup>
         </FormControl>
-        <div className="format"></div>
+        <div className="format">
+          <FormControl>
+            <FormLabel>Format</FormLabel>
+            <RadioGroup
+              row
+              className="luminosityRadio"
+              name="radio-buttons-group"
+              value={Format}
+              onChange={handleFormat}
+            >
+              {formatArray.map((formatMap) => (
+                <Radio
+                  style={{
+                    alignItems: "center",
+                  }}
+                  value={formatMap.toLowerCase()}
+                  label={formatMap}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        </div>
         <div className="count"></div>
       </div>
     </div>
