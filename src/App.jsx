@@ -18,13 +18,13 @@ function App() {
     "Pink",
     "Monochrome",
   ];
-  const [Color, setColor] = useState("random");
+  const [Color, setColor] = useState("#ffffff");
   const [Hue, setHue] = useState("random");
   const [Luminosity, setLuminosity] = useState("random");
   const [Format, setFormat] = useState("hex");
-  const handleHue = (event) => {
-    setHue(event.target.value);
-  };
+  // const handleHue = (event) => {
+  //   setHue(event.target.value);
+  // };
   const handleLuminosity = (event) => {
     setLuminosity(event.target.value);
   };
@@ -42,75 +42,89 @@ function App() {
   };
   return (
     <div className="App" style={{ backgroundColor: Color, height: "100vh" }}>
-      <div className="title">Color Generator</div>
-      <div className="desc">Generate attractive random colors!</div>
-      <div className="colorcode">{Color}</div>
-      <div className="options">
-        <form onSubmit={handleSubmit}>
-          <div className="hue">
-            <FormControl>
-              <FormLabel>Hue</FormLabel>
-              <RadioGroup
-                row
-                sx={{ flexWrap: "wrap" }}
-                className="hueRadio"
-                name="radio-buttons-group"
-                value={Hue}
-                onChange={handleHue}
-              >
+      <div className="nav">
+        <div className="title">Color Generator</div>
+        <div className="desc">Generate attractive random colors!</div>
+      </div>
+      <div className="container">
+        <div className="colorcode">{Color}</div>
+        <div className="options">
+          <form onSubmit={handleSubmit}>
+            <div className="hue">
+              <div className="hueTitle">Hue:</div>
+              <div className="hueSelector">
                 {hueArray.map((hueMap) => (
-                  <Radio value={hueMap.toLowerCase()} label={hueMap} />
+                  <div
+                    className="circle"
+                    style={{ backgroundColor: hueMap }}
+                    onClick={() => setHue(hueMap.toLowerCase())}
+                  ></div>
                 ))}
-              </RadioGroup>
-            </FormControl>
-          </div>
-          <div className="luminosity"></div>
-          <FormControl>
-            <FormLabel>Luminosity</FormLabel>
-            <RadioGroup
-              row
-              style={{ flexWrap: "wrap" }}
-              className="luminosityRadio"
-              name="radio-buttons-group"
-              value={Luminosity}
-              onChange={handleLuminosity}
-            >
-              {luminosityArray.map((luminosityMap) => (
-                <Radio
-                  style={{
-                    alignItems: "center",
-                  }}
-                  value={luminosityMap.toLowerCase()}
-                  label={luminosityMap}
-                />
-              ))}
-            </RadioGroup>
-          </FormControl>
-          <div className="format">
+              </div>
+              {/* <FormControl>
+                <FormLabel>Hue</FormLabel>
+                <RadioGroup
+                  row
+                  sx={{ flexWrap: "wrap" }}
+                  className="hueRadio"
+                  name="radio-buttons-group"
+                  value={Hue}
+                  onChange={handleHue}
+                >
+                  {hueArray.map((hueMap) => (
+                    <Radio value={hueMap.toLowerCase()} label={hueMap} />
+                  ))}
+                </RadioGroup>
+              </FormControl> */}
+            </div>
+            <div className="luminosity"></div>
             <FormControl>
-              <FormLabel>Format</FormLabel>
+              <FormLabel>Luminosity</FormLabel>
               <RadioGroup
                 row
-                className="formatRadio"
+                style={{ flexWrap: "wrap" }}
+                className="luminosityRadio"
                 name="radio-buttons-group"
-                value={Format}
-                onChange={handleFormat}
+                value={Luminosity}
+                onChange={handleLuminosity}
               >
-                {formatArray.map((formatMap) => (
+                {luminosityArray.map((luminosityMap) => (
                   <Radio
                     style={{
                       alignItems: "center",
                     }}
-                    value={formatMap.toLowerCase()}
-                    label={formatMap}
+                    value={luminosityMap.toLowerCase()}
+                    label={luminosityMap}
                   />
                 ))}
               </RadioGroup>
             </FormControl>
-          </div>
-          <div className="count"></div>
-          <Button type="submit">Submit</Button>
-        </form>
+            <div className="format">
+              <FormControl>
+                <FormLabel>Format</FormLabel>
+                <RadioGroup
+                  row
+                  className="formatRadio"
+                  name="radio-buttons-group"
+                  value={Format}
+                  onChange={handleFormat}
+                >
+                  {formatArray.map((formatMap) => (
+                    <Radio
+                      style={{
+                        alignItems: "center",
+                      }}
+                      value={formatMap.toLowerCase()}
+                      label={formatMap}
+                    />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            </div>
+            <div className="count"></div>
+            <Button type="submit">Submit</Button>
+          </form>
+        </div>
       </div>
     </div>
   );
