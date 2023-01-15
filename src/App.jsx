@@ -1,8 +1,6 @@
 import "./App.css";
 import randomcolor from "randomcolor";
-import { Button, Radio, RadioGroup, FormControl, FormLabel } from "@mui/joy/";
 import { useState } from "react";
-// import RadioGroup from "@mui/joy/RadioGroup";
 
 function App() {
   const luminosityArray = ["Random", "Light", "Dark"];
@@ -22,15 +20,6 @@ function App() {
   const [Hue, setHue] = useState("random");
   const [Luminosity, setLuminosity] = useState("random");
   const [Format, setFormat] = useState("hex");
-  // const handleHue = (event) => {
-  //   setHue(event.target.value);
-  // };
-  const handleLuminosity = (event) => {
-    setLuminosity(event.target.value);
-  };
-  const handleFormat = (event) => {
-    setFormat(event.target.value);
-  };
   const handleSubmit = (event) => {
     const color = randomcolor({
       hue: Hue,
@@ -50,57 +39,48 @@ function App() {
         <div className="colorcode">{Color}</div>
         <div className="options">
           <form onSubmit={handleSubmit}>
-            <div className="hue">
-              <div className="hueTitle">Hue:</div>
-              <div className="hueSelector">
+            <div className="hue option">
+              <div className="optionTitle">Hue</div>
+              <div className="optionSelector">
                 {hueArray.map((hueMap) => (
                   <div
                     className="circle"
-                    style={{ backgroundColor: hueMap }}
+                    style={{
+                      background:
+                        hueMap === "Monochrome"
+                          ? "rgb(155, 155, 155)"
+                          : hueMap === "Random"
+                          ? "conic-gradient(red, yellow, green, blue, red)"
+                          : hueMap,
+                      border: "1px solid",
+                    }}
                     onClick={() => setHue(hueMap.toLowerCase())}
                   ></div>
                 ))}
               </div>
-              {/* <FormControl>
-                <FormLabel>Hue</FormLabel>
-                <RadioGroup
-                  row
-                  sx={{ flexWrap: "wrap" }}
-                  className="hueRadio"
-                  name="radio-buttons-group"
-                  value={Hue}
-                  onChange={handleHue}
-                >
-                  {hueArray.map((hueMap) => (
-                    <Radio value={hueMap.toLowerCase()} label={hueMap} />
-                  ))}
-                </RadioGroup>
-              </FormControl> */}
             </div>
-            <div className="luminosity"></div>
-            <FormControl>
-              <FormLabel>Luminosity</FormLabel>
-              <RadioGroup
-                row
-                style={{ flexWrap: "wrap" }}
-                className="luminosityRadio"
-                name="radio-buttons-group"
-                value={Luminosity}
-                onChange={handleLuminosity}
-              >
+            <div className="luminosity option">
+              <div className="optionTitle">Luminosity</div>
+              <div className="optionSelector">
                 {luminosityArray.map((luminosityMap) => (
-                  <Radio
+                  <div
+                    className="circle"
                     style={{
-                      alignItems: "center",
+                      background:
+                        luminosityMap === "Light"
+                          ? "white"
+                          : luminosityMap === "Dark"
+                          ? "black"
+                          : "linear-gradient(135deg, white 0 50%, black 50% 100%)",
+                      border: "1px solid",
                     }}
-                    value={luminosityMap.toLowerCase()}
-                    label={luminosityMap}
-                  />
+                    onClick={() => setLuminosity(luminosityMap.toLowerCase())}
+                  ></div>
                 ))}
-              </RadioGroup>
-            </FormControl>
+              </div>
+            </div>
             <div className="format">
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel>Format</FormLabel>
                 <RadioGroup
                   row
@@ -119,10 +99,10 @@ function App() {
                     />
                   ))}
                 </RadioGroup>
-              </FormControl>
+              </FormControl> */}
             </div>
             <div className="count"></div>
-            <Button type="submit">Submit</Button>
+            <button type="submit">Submit</button>
           </form>
         </div>
       </div>
