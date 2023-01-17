@@ -51,12 +51,32 @@
 }
 
 .circle {
+  color: white;
+  border: 1px solid black;
   cursor: pointer;
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  font-size: 2rem;
+  text-align: center;
 }
+
 .squircle {
+  background: white;
+  border: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  height: 50px;
+  width: 100px;
+  border-radius: 3rem;
+}
+.squircleSelected {
+  background: black;
+  color: white;
+  border: 1px solid black;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -124,6 +144,11 @@
     font-size: 0.6rem;
   }
   .squircle {
+    height: 35px;
+    width: 60px;
+    font-size: 0.8rem;
+  }
+  .squircleSelected {
     height: 35px;
     width: 60px;
     font-size: 0.8rem;

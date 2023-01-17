@@ -1,7 +1,7 @@
 import "./App.css";
 import randomcolor from "randomcolor";
 import { useState, useEffect } from "react";
-//TODO: user input tick mark?
+
 function App() {
   const luminosityArray = ["Random", "Light", "Dark"];
   const formatArray = ["HEX", "RGB", "HSL"];
@@ -67,16 +67,18 @@ function App() {
                   <div
                     className="circle"
                     style={{
+                      textShadow: "0 0 5px #000000, 0 0 5px #000000",
                       background:
                         hueMap === "Monochrome"
                           ? "rgb(155, 155, 155)"
                           : hueMap === "Random"
                           ? "conic-gradient(red, yellow, green, blue, red)"
                           : hueMap,
-                      border: "1px solid",
                     }}
                     onClick={() => setHue(hueMap.toLowerCase())}
-                  ></div>
+                  >
+                    {hueMap.toLowerCase() === Hue ? <>✓</> : null}
+                  </div>
                 ))}
               </div>
             </div>
@@ -87,16 +89,22 @@ function App() {
                   <div
                     className="circle"
                     style={{
+                      color: luminosityMap === "Light" ? "black" : "white",
+                      textShadow:
+                        luminosityMap === "Light"
+                          ? "0"
+                          : "0 0 5px #000000, 0 0 5px #000000",
                       background:
                         luminosityMap === "Light"
                           ? "white"
                           : luminosityMap === "Dark"
                           ? "black"
                           : "linear-gradient(135deg, white 0 50%, black 50% 100%)",
-                      border: "1px solid",
                     }}
                     onClick={() => setLuminosity(luminosityMap.toLowerCase())}
-                  ></div>
+                  >
+                    {luminosityMap.toLowerCase() === Luminosity ? <>✓</> : null}
+                  </div>
                 ))}
               </div>
             </div>
@@ -105,12 +113,13 @@ function App() {
               <div className="optionSelector">
                 {formatArray.map((formatMap) => (
                   <div
-                    className="squircle"
-                    style={{
-                      background: "white",
-                      border: "1px solid",
-                    }}
+                    className={
+                      formatMap.toLowerCase() === Format
+                        ? "squircleSelected"
+                        : "squircle"
+                    }
                     onClick={() => setFormat(formatMap.toLowerCase())}
+                    // style={{ color: "white", background: "black" }}
                   >
                     {formatMap}
                   </div>
