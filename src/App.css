@@ -1,29 +1,47 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 .nav {
+  /* margin: 0 1rem 0 1rem; */
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 1.5rem;
+  font-size: 2rem;
   background-color: whitesmoke;
-  transform: translateY(1rem);
-  padding: 1rem;
-  margin: 0 5rem 0 5rem;
-  border-radius: 2rem;
+
+  padding: 0.5rem 0 0.5rem 0;
+  border-radius: 0 0 2rem 2rem;
+}
+.nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+.desc {
+  font-size: 1rem;
 }
 
 .container {
-  transform: translateY(30vh);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: whitesmoke;
-
-  border-radius: 2rem;
+  border-radius: 2rem 2rem 0 0;
   margin: 0 8rem 0 8rem;
 }
-
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 0 1rem 0 1rem;
+  }
+}
 .colorcode {
+  cursor: help;
   background-color: rgb(0, 0, 0);
   color: #fff;
   border-radius: 1rem;
@@ -33,17 +51,28 @@
 }
 
 .circle {
+  cursor: pointer;
   height: 50px;
   width: 50px;
   border-radius: 50%;
 }
+.squircle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  height: 50px;
+  width: 100px;
+  border-radius: 3rem;
+}
 .options {
-  transform: translateY(-20%);
+  transform: translateY(-10%);
 }
 .option {
+  margin: 1rem 3rem 0 3rem;
   display: flex;
   flex-direction: row;
-  margin-top: 1rem;
 }
 .optionTitle {
   font-size: 1.5rem;
@@ -54,6 +83,26 @@
 
 .optionSelector {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   gap: 1rem;
+}
+.button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.generate {
+  /* transform: translateY(1px); */
+  font-family: "Montserrat", sans-serif;
+  padding: 1rem 0 1rem 0;
+  width: 100vw;
+  cursor: pointer;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 2rem 2rem 0 0;
 }

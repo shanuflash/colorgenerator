@@ -1,7 +1,7 @@
 import "./App.css";
 import randomcolor from "randomcolor";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+//TODO: user input tick mark?
 function App() {
   const luminosityArray = ["Random", "Light", "Dark"];
   const formatArray = ["HEX", "RGB", "HSL"];
@@ -29,14 +29,33 @@ function App() {
     setColor(color);
     event.preventDefault();
   };
+  useEffect(() => {
+    const color = randomcolor({
+      hue: Hue,
+      luminosity: Luminosity,
+      format: Format,
+    });
+    setColor(color);
+  }, [Hue, Luminosity, Format]);
   return (
-    <div className="App" style={{ backgroundColor: Color, height: "100vh" }}>
-      <div className="nav">
-        <div className="title">Color Generator</div>
-        <div className="desc">Generate attractive random colors!</div>
+    <div
+      className="App"
+      style={{ backgroundColor: Color, height: "100vh" }}
+      data-joy-color-scheme="dark"
+    >
+      <div className="nav-container">
+        <div className="nav">
+          <div className="title">Color Generator</div>
+          <div className="desc">Generate attractive random colors!</div>
+        </div>
       </div>
       <div className="container">
-        <div className="colorcode">{Color}</div>
+        <div
+          className="colorcode"
+          onClick={() => navigator.clipboard.writeText(Color)}
+        >
+          {Color}
+        </div>
         <div className="options">
           <form onSubmit={handleSubmit}>
             <div className="hue option">
@@ -79,31 +98,29 @@ function App() {
                 ))}
               </div>
             </div>
-            <div className="format">
-              {/* <FormControl>
-                <FormLabel>Format</FormLabel>
-                <RadioGroup
-                  row
-                  className="formatRadio"
-                  name="radio-buttons-group"
-                  value={Format}
-                  onChange={handleFormat}
-                >
-                  {formatArray.map((formatMap) => (
-                    <Radio
-                      style={{
-                        alignItems: "center",
-                      }}
-                      value={formatMap.toLowerCase()}
-                      label={formatMap}
-                    />
-                  ))}
-                </RadioGroup>
-              </FormControl> */}
+            <div className="format option">
+              <div className="optionTitle">Format</div>
+              <div className="optionSelector">
+                {formatArray.map((formatMap) => (
+                  <div
+                    className="squircle"
+                    style={{
+                      background: "white",
+                      border: "1px solid",
+                    }}
+                    onClick={() => setFormat(formatMap.toLowerCase())}
+                  >
+                    {formatMap}
+                  </div>
+                ))}
+              </div>
             </div>
+            {/* WIP */}
             <div className="count"></div>
-            <button type="submit">Submit</button>
           </form>
+        </div>
+        <div className="button">
+          <button className="generate">Generate</button>
         </div>
       </div>
     </div>
