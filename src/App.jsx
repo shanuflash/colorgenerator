@@ -36,7 +36,7 @@ function App() {
       format: Format,
     });
     setColor(color);
-  }, [Hue, Luminosity, Format]);
+  }, []);
   return (
     <div
       className="App"
@@ -51,10 +51,12 @@ function App() {
       </div>
       <div className="container">
         <div
+          title="Click to Copy"
           className="colorcode"
           onClick={() => navigator.clipboard.writeText(Color)}
         >
           {Color}
+          <div className="tooltip">Click to Copy</div>
         </div>
         <div className="options">
           <form onSubmit={handleSubmit}>
@@ -120,7 +122,9 @@ function App() {
           </form>
         </div>
         <div className="button">
-          <button className="generate">Generate</button>
+          <button className="generate" onClick={handleSubmit}>
+            Generate
+          </button>
         </div>
       </div>
     </div>
